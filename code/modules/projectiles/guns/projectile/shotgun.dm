@@ -21,6 +21,7 @@
 	var/recentpump = 0 // to prevent spammage
 	var/pumped = 0
 	var/obj/item/ammo_casing/current_shell = null
+	reloadsound = 'sound/weapons/shotgun_shell_insert.ogg'
 	gun_flags = 0
 
 /obj/item/weapon/gun/projectile/shotgun/isHandgun()
@@ -52,6 +53,7 @@
 	if(current_shell)//We have a shell in the chamber
 		current_shell.forceMove(get_turf(src))//Eject casing
 		playsound(current_shell, casingsound, 25, 0.2, 1)
+		playsound(current_shell, 'sound/weapons/shotgun_shell_bounce.ogg', 25, 0.2, 1)
 		current_shell = null
 		if(in_chamber)
 			in_chamber = null
@@ -88,6 +90,7 @@
 	caliber = list(GAUGE12 = 1, GAUGEFLARE = 1)
 	origin_tech = Tc_COMBAT + "=3;" + Tc_MATERIALS + "=1"
 	ammo_type = "/obj/item/ammo_casing/shotgun/beanbag"
+	reloadsound = 'sound/weapons/shotgun_shell_insert.ogg'
 	fire_sound = 'sound/weapons/shotgun_small.ogg'
 
 /obj/item/weapon/gun/projectile/shotgun/doublebarrel/process_chambered()
@@ -118,6 +121,7 @@
 		loaded_shell.pixel_x = min(-3 + (i*4),15) * PIXEL_MULTIPLIER
 		loaded_shell.pixel_y = min( 3 - (i*4),15) * PIXEL_MULTIPLIER
 		playsound(loaded_shell, casingsound, 25, 0.2, 1)
+		playsound(loaded_shell, 'sound/weapons/shotgun_shell_bounce.ogg', 25, 0.2, 1)
 		if(loaded_shell in loaded)
 			loaded -= loaded_shell
 		i++
